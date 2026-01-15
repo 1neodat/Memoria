@@ -833,16 +833,39 @@
         }
         // Crear cartas
         function createCards() {
-            // Seleccionar 8 banderas aleatorias (sin repetición)
+            // Seleccionar 8 banderas aleatorias SIN REPETIR Japón
             const selectedFlags = [];
-            const flagElementsCopy = [...flagElements]; // Copia del array original
+            const flagElementsCopy = [...flagElements];
             
             // Mezclar las banderas primero
             shuffleArray(flagElementsCopy);
             
             // Tomar las primeras 8 banderas únicas
-            for (let i = 0; i < 8; i++) {
-                selectedFlags.push(flagElementsCopy[i]);
+            for (let i = 0; i < flagElementsCopy.length && selectedFlags.length < 8; i++) {
+                const flag = flagElementsCopy[i];
+                // Verificar que no sea Japón (o cualquier otra bandera que ya esté seleccionada)
+                if (selectedFlags.some(f => f.name === flag.name)) {
+                    continue; // Saltar si ya está seleccionada
+                }
+                selectedFlags.push(flag);
+            }
+            
+            // Si no tenemos suficientes banderas únicas, agregar algunas por defecto
+            if (selectedFlags.length < 8) {
+                const defaultFlags = [
+                    {name: "Canadá", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Flag_of_Canada.svg/2560px-Flag_of_Canada.svg.png"},
+                    {name: "Reino Unido", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Flag_of_the_United_Kingdom.svg/2560px-Flag_of_the_United_Kingdom.svg.png"},
+                    {name: "Estados Unidos", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Flag_of_the_United_States.svg/2560px-Flag_of_the_United_States.svg.png"},
+                    {name: "México", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Flag_of_Mexico.svg/2560px-Flag_of_Mexico.svg.png"},
+                    {name: "Francia", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Flag_of_France.svg/2560px-Flag_of_France.svg.png"},
+                    {name: "Alemania", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Flag_of_Germany.svg/2560px-Flag_of_Germany.svg.png"},
+                    {name: "Italia", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Flag_of_Italy.svg/2560px-Flag_of_Italy.svg.png"},
+                    {name: "Brasil", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Flag_of_Brazil.svg/2560px-Flag_of_Brazil.svg.png"}
+                ];
+                
+                for (let i = selectedFlags.length; i < 8; i++) {
+                    selectedFlags.push(defaultFlags[i]);
+                }
             }
             
             // Duplicar para hacer parejas y mezclar
