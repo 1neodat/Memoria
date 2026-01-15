@@ -831,35 +831,43 @@
             createCards();
             renderCards();
         }
-
         // Crear cartas
         function createCards() {
-        // Seleccionar 9 banderas aleatorias (sin repetición)
-        const selectedFlags = [];
-        const flagElementsCopy = [...flagElements]; // Copia del array original
-        
-        // Mezclar las banderas primero
-        shuffleArray(flagElementsCopy);
-        
-        // Tomar las primeras 8 banderas únicas
-        for (let i = 0; i < 8; i++) {
-            selectedFlags.push(flagElementsCopy[i]);
+            // Seleccionar 8 banderas aleatorias (sin repetición)
+            const selectedFlags = [];
+            const flagElementsCopy = [...flagElements]; // Copia del array original
+            
+            // Mezclar las banderas primero
+            shuffleArray(flagElementsCopy);
+            
+            // Tomar las primeras 8 banderas únicas
+            for (let i = 0; i < 8; i++) {
+                selectedFlags.push(flagElementsCopy[i]);
+            }
+            
+            // Duplicar para hacer parejas y mezclar
+            const pairedFlags = [];
+            
+            // Crear parejas de forma correcta
+            selectedFlags.forEach(flag => {
+                // Crear dos copias independientes de cada bandera
+                pairedFlags.push({...flag});
+                pairedFlags.push({...flag});
+            });
+            
+            shuffleArray(pairedFlags);
+            
+            cards = pairedFlags.map((flag, index) => {
+                return {
+                    id: index,
+                    name: flag.name,
+                    imageUrl: flag.url,
+                    flipped: false,
+                    matched: false
+                };
+            });
         }
         
-        // Duplicar para hacer parejas y mezclar
-        const pairedFlags = [...selectedFlags, ...selectedFlags];
-        shuffleArray(pairedFlags);
-        
-        cards = pairedFlags.map((flag, index) => {
-            return {
-                id: index,
-                name: flag.name,
-                imageUrl: flag.url,
-                flipped: false,
-                matched: false
-            };
-        });
-    }
         // Función para mezclar array
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
