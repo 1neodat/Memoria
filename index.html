@@ -838,7 +838,7 @@
             const selectedFlags = [];
             const usedIndices = new Set();
             
-            while (selectedFlags.length < 9) {
+            while (selectedFlags.length < 8) {
                 const randomIndex = Math.floor(Math.random() * flagElements.length);
                 if (!usedIndices.has(randomIndex)) {
                     selectedFlags.push(flagElements[randomIndex]);
@@ -901,7 +901,6 @@
         // Obtener bandera alternativa en caso de error
         function getFallbackFlag(index) {
             const fallbackFlags = [
-                "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Flag_of_Mexico.svg/800px-Flag_of_Mexico.svg.png",
                 "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Flag_of_Japan.svg/800px-Flag_of_Japan.svg.png",
                 "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Flag_of_France.svg/800px-Flag_of_France.svg.png",
                 "https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Flag_of_Italy.svg/800px-Flag_of_Italy.svg.png"
