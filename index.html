@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌍 Memoria de Banderas del Mundo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0c2461, #1e3799, #4a69bd);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: white;
+        }
+
+        .container {
+            max-width: 1300px;
+            width: 100%;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 25px;
+            backdrop-filter: blur(15px);
+            border: 3px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1);
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #ffd166, #ff9e6d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        .game-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 25px 35px;
+            border-radius: 20px;
+            margin-bottom: 35px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            flex-wrap: wrap;
+            gap: 25px;
+            color: #333;
+            border: 3px solid #ffd166;
+        }
+
+        .stats {
+            display: flex;
+            gap: 35px;
+        }
+
+        .stat-box {
+            text-align: center;
+            padding: 20px 30px;
+            background: linear-gradient(135deg, #1e3799, #4a69bd);
+            border-radius: 15px;
+            min-width: 150px;
+            color: white;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-box:nth-child(2) {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+        }
+
+        .stat-box:nth-child(3) {
+            background: linear-gradient(135deg, #00b894, #00a085);
+        }
+
+        .stat-value {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .controls {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        button {
+            padding: 16px 30px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #ffd166, #ff9e6d);
+            color: #333;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 6px 15px rgba(255, 209, 102, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 209, 102, 0.4);
+        }
+
+        button:active {
+            transform: translateY(1px);
+        }
+
+        button::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: 0.5s;
+        }
+
+        button:hover::after {
+            left: 100%;
+        }
+
+        .game-board {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+            perspective: 1000px;
+        }
+
+        @media (max-width: 1300px) {
+            .game-board {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media (max-width: 900px) {
+            .game-board {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 15px;
+            }
+            
+            .game-info {
+                flex-direction: column;
+                text-align: center;
+                padding: 25px;
+            }
+            
+            .stats {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            h1 {
+                font-size: 2.8rem;
+            }
+            
+            .stat-box {
+                min-width: 130px;
+                padding: 15px 25px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .game-board {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .stat-box {
+                min-width: 110px;
+                padding: 12px 20px;
+            }
+            
+            .stat-value {
+                font-size: 2.5rem;
+            }
+            
+            button {
+                padding: 14px 25px;
+                font-size: 1rem;
+            }
+        }
+
+        .card {
+            height: 180px;
+            border-radius: 18px;
+            perspective: 1000px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: scale(1.05) rotate(2deg);
+        }
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-style: preserve-3d;
+        }
+
+        .card.flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .card-front {
+            background: linear-gradient(135deg, #a29bfe, #74b9ff);
+            color: white;
+            font-size: 3.2rem;
+            font-weight: 800;
+            border: 5px solid white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-back {
+            background: white;
+            transform: rotateY(180deg);
+            padding: 0;
+            border: 5px solid #ffd166;
+        }
+
+        .card-back img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .matched {
+            animation: matchedAnimation 0.6s ease;
+            cursor: default;
+        }
+
+        .matched .card-back {
+            border: 5px solid #00b894;
+            box-shadow: 0 0 25px rgba(0, 184, 148, 0.5);
+        }
+
+        @keyframes matchedAnimation {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(135deg, #ffd166, #ff9e6d);
+            padding: 60px 50px;
+            border-radius: 25px;
+            text-align: center;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+            z-index: 100;
+            display: none;
+            max-width: 550px;
+            width: 90%;
+            border: 5px solid white;
+            color: #333;
+            animation: messageAppear 0.5s ease;
+        }
+
+        @keyframes messageAppear {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -60%);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        .message h2 {
+            margin-bottom: 25px;
+            font-size: 2.8rem;
+            color: #0c2461;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            z-index: 99;
+            display: none;
+            backdrop-filter: blur(5px);
+        }
+
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            width: 100%;
+            border-top: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .progress-container {
+            width: 100%;
+            height: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            margin: 25px 0 35px 0;
+            overflow: hidden;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #ff6b6b, #ffd166, #4ecdc4);
+            width: 0%;
+            transition: width 0.8s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: progressShine 2s infinite;
+        }
+
+        @keyframes progressShine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .flag-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+            font-size: 2rem;
+        }
+
+        .game-instructions {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 20px;
+            margin-top: 30px;
+            border-left: 5px solid #ffd166;
+        }
+
+        .game-instructions h3 {
+            margin-bottom: 15px;
+            color: #ffd166;
+            font-size: 1.5rem;
+        }
+
+        .game-instructions ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .game-instructions li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .game-instructions li::before {
+            content: '🏁';
+            position: absolute;
+            left: 0;
+        }
+
+        .score-display {
+            font-size: 1.4rem;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌍 Memoria de Banderas del Mundo</h1>
+            <p class="subtitle">¡Encuentra las parejas de banderas internacionales! Pon a prueba tu memoria y conocimiento geográfico.</p>
+            <div class="flag-icons">
+                🇲🇽 🇺🇸 🇪🇸 🇫🇷 🇯🇵 🇩🇪 🇮🇹 🇬🇧 🇨🇳 🇧🇷 🇨🇦 🇦🇺
+            </div>
+        </header>
+
+        <div class="game-info">
+            <div class="stats">
+                <div class="stat-box">
+                    <div class="stat-value" id="moves">0</div>
+                    <div class="stat-label">Movimientos</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" id="matches">0</div>
+                    <div class="stat-label">Aciertos</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" id="remaining">9</div>
+                    <div class="stat-label">Parejas Restantes</div>
+                </div>
+            </div>
+            
+            <div class="controls">
+                <button id="restart-btn"><i class="fas fa-sync-alt"></i> Nuevo Juego</button>
+                <button id="hint-btn"><i class="fas fa-eye"></i> Ver Todas</button>
+            </div>
+        </div>
+
+        <div class="progress-container">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+
+        <div class="game-board" id="game-board">
+            <!-- Cartas generadas por JavaScript -->
+        </div>
+
+        <div class="game-instructions">
+            <h3><i class="fas fa-info-circle"></i> Instrucciones del Juego</h3>
+            <ul>
+                <li>Haz clic en una carta para voltearla y revelar la bandera</li>
+                <li>Encuentra dos cartas con la misma bandera para hacer una pareja</li>
+                <li>Las parejas permanecerán visibles cuando las encuentres</li>
+                <li>Completa todas las 9 parejas para ganar el juego</li>
+                <li>Intenta usar la menor cantidad de movimientos posible</li>
+            </ul>
+        </div>
+
+        <footer>
+            <p>🎮 Juego educativo de memoria de banderas | Desarrollado para aprendizaje geográfico visual</p>
+        </footer>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+    
+    <div class="message" id="win-message">
+        <h2><i class="fas fa-trophy"></i> ¡Victoria!</h2>
+        <div class="score-display">
+            <p>Has completado el juego de memoria de banderas</p>
+            <p><strong>Movimientos totales:</strong> <span id="final-moves" style="font-size: 2.5rem; color: #0c2461;">0</span></p>
+        </div>
+        <button id="play-again-btn" style="background: linear-gradient(135deg, #1e3799, #4a69bd); color: white; padding: 18px 35px; font-size: 1.2rem;">
+            <i class="fas fa-play-circle"></i> Jugar de Nuevo
+        </button>
+    </div>
+
+    <script>
+        // Variables del juego
+        let cards = [];
+        let flippedCards = [];
+        let matchedPairs = 0;
+        const totalPairs = 9;
+        let moves = 0;
+        let gameStarted = false;
+        let canFlip = true;
+
+        // Elementos del DOM
+        const gameBoard = document.getElementById('game-board');
+        const movesElement = document.getElementById('moves');
+        const matchesElement = document.getElementById('matches');
+        const remainingElement = document.getElementById('remaining');
+        const progressBar = document.getElementById('progress-bar');
+        const restartBtn = document.getElementById('restart-btn');
+        const hintBtn = document.getElementById('hint-btn');
+        const winMessage = document.getElementById('win-message');
+        const overlay = document.getElementById('overlay');
+        const playAgainBtn = document.getElementById('play-again-btn');
+        const finalMoves = document.getElementById('final-moves');
+
+        // BANDERAS DE ALTA CALIDAD - TODAS BANDERAS
+        const flagElements = [
+            {
+                name: "México",
+                url: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Flag_of_Mexico.svg/2560px-Flag_of_Mexico.svg.png"
+            },
+            {
+                name: "Japón",
+                url: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Flag_of_Japan.svg/2560px-Flag_of_Japan.svg.png"
+            },
+            {
+                name: "Francia",
+                url: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Flag_of_France.svg/2560px-Flag_of_France.svg.png"
+            },
+            {
+                name: "Italia",
+                url: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Flag_of_Italy.svg/2560px-Flag_of_Italy.svg.png"
+            },
+            {
+                name: "Estados Unidos",
+                url: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Flag_of_the_United_States.svg/2560px-Flag_of_the_United_States.svg.png"
+            },
+            {
+                name: "Alemania",
+                url: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Flag_of_Germany.svg/2560px-Flag_of_Germany.svg.png"
+            },
+            {
+                name: "Brasil",
+                url: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Flag_of_Brazil.svg/2560px-Flag_of_Brazil.svg.png"
+            },
+            {
+                name: "España",
+                url: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Flag_of_Spain.svg/2560px-Flag_of_Spain.svg.png"
+            },
+            {
+                name: "Canadá",
+                url: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Flag_of_Canada.svg/2560px-Flag_of_Canada.svg.png"
+            },
+            {
+                name: "Australia",
+                url: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Flag_of_Australia_%28converted%29.svg/2560px-Flag_of_Australia_%28converted%29.svg.png"
+            },
+            {
+                name: "China",
+                url: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Flag_of_the_People%27s_Republic_of_China.svg/2560px-Flag_of_the_People%27s_Republic_of_China.svg.png"
+            },
+            {
+                name: "Reino Unido",
+                url: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Flag_of_the_United_Kingdom.svg/2560px-Flag_of_the_United_Kingdom.svg.png"
+            },
+            {
+                name: "Argentina",
+                url: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Flag_of_Argentina.svg/2560px-Flag_of_Argentina.svg.png"
+            },
+            {
+                name: "Rusia",
+                url: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Flag_of_Russia.svg/2560px-Flag_of_Russia.svg.png"
+            },
+            {
+                name: "Corea del Sur",
+                url: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Flag_of_South_Korea.svg/2560px-Flag_of_South_Korea.svg.png"
+            }
+        ];
+
+        // Inicializar el juego
+        function initGame() {
+            cards = [];
+            flippedCards = [];
+            matchedPairs = 0;
+            moves = 0;
+            gameStarted = false;
+            canFlip = true;
+            
+            movesElement.textContent = moves;
+            matchesElement.textContent = matchedPairs;
+            remainingElement.textContent = totalPairs;
+            progressBar.style.width = "0%";
+            
+            createCards();
+            renderCards();
+        }
+
+        // Crear cartas
+        function createCards() {
+            // Seleccionar 9 banderas aleatorias
+            const selectedFlags = [];
+            const usedIndices = new Set();
+            
+            while (selectedFlags.length < 9) {
+                const randomIndex = Math.floor(Math.random() * flagElements.length);
+                if (!usedIndices.has(randomIndex)) {
+                    selectedFlags.push(flagElements[randomIndex]);
+                    usedIndices.add(randomIndex);
+                }
+            }
+            
+            // Duplicar para hacer parejas y mezclar
+            const pairedFlags = [...selectedFlags, ...selectedFlags];
+            shuffleArray(pairedFlags);
+            
+            cards = pairedFlags.map((flag, index) => {
+                return {
+                    id: index,
+                    name: flag.name,
+                    imageUrl: flag.url,
+                    flipped: false,
+                    matched: false
+                };
+            });
+        }
+
+        // Función para mezclar array
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Renderizar cartas
+        function renderCards() {
+            gameBoard.innerHTML = "";
+            
+            cards.forEach((card, index) => {
+                const cardElement = document.createElement("div");
+                cardElement.className = "card";
+                if (card.flipped) cardElement.classList.add("flipped");
+                if (card.matched) cardElement.classList.add("matched");
+                
+                cardElement.innerHTML = `
+                    <div class="card-inner">
+                        <div class="card-front">
+                            ${index + 1}
+                        </div>
+                        <div class="card-back">
+                            <img src="${card.imageUrl}" alt="Bandera" 
+                                 loading="lazy" 
+                                 onerror="this.onerror=null; this.src='${getFallbackFlag(index)}'">
+                        </div>
+                    </div>
+                `;
+                
+                cardElement.addEventListener("click", () => flipCard(card, cardElement));
+                gameBoard.appendChild(cardElement);
+            });
+        }
+
+        // Obtener bandera alternativa en caso de error
+        function getFallbackFlag(index) {
+            const fallbackFlags = [
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Flag_of_Mexico.svg/800px-Flag_of_Mexico.svg.png",
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Flag_of_Japan.svg/800px-Flag_of_Japan.svg.png",
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Flag_of_France.svg/800px-Flag_of_France.svg.png",
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Flag_of_Italy.svg/800px-Flag_of_Italy.svg.png"
+            ];
+            return fallbackFlags[index % fallbackFlags.length];
+        }
+
+        // Voltear carta
+        function flipCard(card, cardElement) {
+            if (card.flipped || card.matched || !canFlip || flippedCards.length >= 2) {
+                return;
+            }
+            
+            if (!gameStarted) {
+                gameStarted = true;
+            }
+            
+            card.flipped = true;
+            cardElement.classList.add("flipped");
+            flippedCards.push({card, element: cardElement});
+            
+            if (flippedCards.length === 2) {
+                moves++;
+                movesElement.textContent = moves;
+                canFlip = false;
+                
+                const card1 = flippedCards[0].card;
+                const card2 = flippedCards[1].card;
+                
+                if (card1.name === card2.name) {
+                    setTimeout(() => {
+                        card1.matched = true;
+                        card2.matched = true;
+                        
+                        flippedCards[0].element.classList.add("matched");
+                        flippedCards[1].element.classList.add("matched");
+                        
+                        flippedCards = [];
+                        matchedPairs++;
+                        matchesElement.textContent = matchedPairs;
+                        remainingElement.textContent = totalPairs - matchedPairs;
+                        
+                        // Actualizar barra de progreso
+                        const progressPercentage = (matchedPairs / totalPairs) * 100;
+                        progressBar.style.width = `${progressPercentage}%`;
+                        
+                        canFlip = true;
+                        
+                        if (matchedPairs === totalPairs) {
+                            setTimeout(() => endGame(), 800);
+                        }
+                    }, 600);
+                } else {
+                    setTimeout(() => {
+                        card1.flipped = false;
+                        card2.flipped = false;
+                        
+                        flippedCards[0].element.classList.remove("flipped");
+                        flippedCards[1].element.classList.remove("flipped");
+                        
+                        flippedCards = [];
+                        canFlip = true;
+                    }, 1000);
+                }
+            }
+        }
+
+        // Mostrar ayuda (ver todas las cartas)
+        function showHint() {
+            if (!gameStarted || flippedCards.length > 0) return;
+            
+            canFlip = false;
+            const cardElements = document.querySelectorAll('.card:not(.matched)');
+            
+            cardElements.forEach(cardElement => {
+                cardElement.classList.add('flipped');
+            });
+            
+            setTimeout(() => {
+                cardElements.forEach(cardElement => {
+                    cardElement.classList.remove('flipped');
+                });
+                
+                cards.forEach(card => {
+                    if (!card.matched) {
+                        card.flipped = false;
+                    }
+                });
+                
+                canFlip = true;
+            }, 2000);
+        }
+
+        // Finalizar juego
+        function endGame() {
+            finalMoves.textContent = moves;
+            overlay.style.display = "block";
+            winMessage.style.display = "block";
+        }
+
+        // Event Listeners
+        restartBtn.addEventListener("click", initGame);
+        hintBtn.addEventListener("click", showHint);
+        playAgainBtn.addEventListener("click", () => {
+            overlay.style.display = "none";
+            winMessage.style.display = "none";
+            initGame();
+        });
+
+        // Inicializar
+        window.addEventListener("DOMContentLoaded", initGame);
+    </script>
+</body>
+</html>
