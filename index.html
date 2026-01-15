@@ -25,12 +25,12 @@
         body {
             background: linear-gradient(135deg, var(--azul-marino), #002244);
             min-height: 100vh;
-            padding: 10px;
+            padding: 5px;
             display: flex;
             flex-direction: column;
             align-items: center;
             color: var(--blanco);
-            overflow-x: hidden;
+            overflow: hidden;
             position: relative;
         }
 
@@ -38,8 +38,8 @@
         .uide-watermark {
             position: absolute;
             z-index: 1;
-            opacity: 0.05;
-            font-size: 15rem;
+            opacity: 0.04;
+            font-size: 10rem;
             font-weight: 900;
             color: var(--mostaza);
             top: 50%;
@@ -54,117 +54,81 @@
             position: fixed;
             z-index: 2;
             pointer-events: none;
-            border: 3px solid var(--mostaza);
-            border-radius: 25px;
-            top: 15px;
-            left: 15px;
-            right: 15px;
-            bottom: 15px;
-            box-shadow: 0 0 30px rgba(218, 165, 32, 0.3);
+            border: 2px solid var(--mostaza);
+            border-radius: 20px;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            box-shadow: 0 0 20px rgba(218, 165, 32, 0.2);
         }
 
         /* Esquinas decorativas */
         .corner-decoration {
             position: fixed;
-            width: 40px;
-            height: 40px;
-            border: 3px solid var(--mostaza);
+            width: 25px;
+            height: 25px;
+            border: 2px solid var(--mostaza);
             z-index: 3;
         }
 
         .corner-tl {
-            top: 15px;
-            left: 15px;
+            top: 10px;
+            left: 10px;
             border-right: none;
             border-bottom: none;
-            border-radius: 15px 0 0 0;
+            border-radius: 10px 0 0 0;
         }
 
         .corner-tr {
-            top: 15px;
-            right: 15px;
+            top: 10px;
+            right: 10px;
             border-left: none;
             border-bottom: none;
-            border-radius: 0 15px 0 0;
+            border-radius: 0 10px 0 0;
         }
 
         .corner-bl {
-            bottom: 15px;
-            left: 15px;
+            bottom: 10px;
+            left: 10px;
             border-right: none;
             border-top: none;
-            border-radius: 0 0 0 15px;
+            border-radius: 0 0 0 10px;
         }
 
         .corner-br {
-            bottom: 15px;
-            right: 15px;
+            bottom: 10px;
+            right: 10px;
             border-left: none;
             border-top: none;
-            border-radius: 0 0 15px 0;
+            border-radius: 0 0 10px 0;
         }
 
-        /* Elementos decorativos UIDE */
-        .uide-logo-side {
-            position: fixed;
-            color: var(--mostaza);
-            font-weight: 900;
-            font-size: 1.2rem;
-            z-index: 2;
-            opacity: 0.4;
-            transform: rotate(-90deg);
-            white-space: nowrap;
-        }
-
-        .uide-left {
-            left: 5px;
-            top: 50%;
-            transform: translateY(-50%) rotate(-90deg);
-        }
-
-        .uide-right {
-            right: 5px;
-            top: 50%;
-            transform: translateY(-50%) rotate(90deg);
-        }
-
-        .uide-top {
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 1rem;
-            opacity: 0.3;
-        }
-
-        .uide-bottom {
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 1rem;
-            opacity: 0.3;
-        }
-
-        /* Contenedor principal */
+        /* Contenedor principal COMPACTO */
         .container {
             max-width: 1100px;
-            width: 95%;
-            padding: 15px;
+            width: 100%;
+            padding: 10px;
             z-index: 4;
             position: relative;
+            height: calc(100vh - 20px);
+            display: flex;
+            flex-direction: column;
         }
 
-        /* Header con colores UIDE */
+        /* Header COMPACTO */
         header {
             text-align: center;
-            margin-bottom: 20px;
-            padding: 25px;
+            margin-bottom: 10px;
+            padding: 15px;
             background: linear-gradient(135deg, var(--vino-tinto), #6a0000);
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            border: 3px solid var(--mostaza);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+            border: 2px solid var(--mostaza);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
             position: relative;
             overflow: hidden;
+            flex-shrink: 0;
         }
 
         header::before {
@@ -173,52 +137,53 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 5px;
+            height: 3px;
             background: linear-gradient(90deg, var(--mostaza), var(--vino-tinto), var(--mostaza));
         }
 
         h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
+            font-size: 1.8rem;
+            margin-bottom: 5px;
             background: linear-gradient(45deg, var(--mostaza), var(--dorado));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
         }
 
-        .subtitle {
-            font-size: 1.1rem;
-            opacity: 0.95;
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.4;
-            font-weight: 500;
-            color: var(--blanco);
+        .flag-icons {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 5px;
+            flex-wrap: wrap;
+            font-size: 1.2rem;
+            position: relative;
+            z-index: 1;
         }
 
-        /* Panel de información del juego */
+        /* Panel de información del juego COMPACTO */
         .game-info {
             display: flex;
             justify-content: space-between;
             align-items: center;
             background: linear-gradient(135deg, rgba(0, 51, 102, 0.9), rgba(139, 0, 0, 0.9));
-            padding: 20px 25px;
-            border-radius: 15px;
-            margin-bottom: 25px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-            flex-wrap: wrap;
-            gap: 15px;
+            padding: 12px 15px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            gap: 10px;
             color: var(--blanco);
             border: 2px solid var(--mostaza);
             position: relative;
+            flex-shrink: 0;
         }
 
         .game-info::before {
             content: 'NEGOCIOS INTERNACIONALES';
             position: absolute;
-            font-size: 1.5rem;
+            font-size: 1rem;
             font-weight: 900;
-            opacity: 0.1;
+            opacity: 0.08;
             color: var(--mostaza);
             top: 50%;
             left: 50%;
@@ -228,27 +193,24 @@
 
         .stats {
             display: flex;
-            gap: 20px;
+            gap: 10px;
             position: relative;
             z-index: 1;
+            flex-wrap: wrap;
         }
 
         .stat-box {
             text-align: center;
-            padding: 15px 20px;
+            padding: 8px 12px;
             background: linear-gradient(135deg, var(--azul-marino), #004488);
-            border-radius: 12px;
-            min-width: 120px;
+            border-radius: 10px;
+            min-width: 90px;
             color: var(--blanco);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
             position: relative;
             overflow: hidden;
             transition: transform 0.3s;
-            border: 2px solid rgba(218, 165, 32, 0.3);
-        }
-
-        .stat-box:hover {
-            transform: translateY(-3px);
+            border: 1px solid rgba(218, 165, 32, 0.3);
         }
 
         .stat-box:nth-child(2) {
@@ -259,262 +221,70 @@
             background: linear-gradient(135deg, var(--mostaza), #b8860b);
         }
 
-        .stat-box::before {
-            content: '🌐'; /* Cambié UIDE por un emoji de globo */
-            position: absolute;
-            font-size: 1.5rem;
-            font-weight: 900;
-            opacity: 0.2;
-            color: var(--blanco);
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
         .stat-value {
-            font-size: 2.2rem;
+            font-size: 1.5rem;
             font-weight: 800;
-            margin-bottom: 5px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            margin-bottom: 2px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
             position: relative;
             z-index: 1;
         }
 
         .stat-label {
-            font-size: 0.85rem;
+            font-size: 0.7rem;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
             position: relative;
             z-index: 1;
         }
 
         .controls {
             display: flex;
-            gap: 15px;
+            gap: 8px;
             align-items: center;
             position: relative;
             z-index: 1;
+            flex-shrink: 0;
         }
 
         button {
-            padding: 12px 22px;
+            padding: 8px 12px;
             border: none;
-            border-radius: 10px;
+            border-radius: 8px;
             background: linear-gradient(135deg, var(--mostaza), #b8860b);
             color: var(--azul-marino);
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s;
-            box-shadow: 0 4px 12px rgba(218, 165, 32, 0.3);
+            box-shadow: 0 3px 8px rgba(218, 165, 32, 0.2);
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 0.95rem;
+            gap: 5px;
+            font-size: 0.8rem;
             position: relative;
             overflow: hidden;
-            border: 2px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            white-space: nowrap;
         }
 
         button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(218, 165, 32, 0.4);
+            box-shadow: 0 5px 12px rgba(218, 165, 32, 0.3);
         }
 
-        button::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: 0.5s;
-        }
-
-        button:hover::after {
-            left: 100%;
-        }
-
-        #play-again-btn {
-            background: linear-gradient(135deg, var(--azul-marino), var(--vino-tinto));
-            color: var(--blanco);
-            padding: 15px 28px;
-            font-size: 1rem;
-        }
-
-        /* Tablero de juego */
-        .game-board {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            margin-bottom: 25px;
-            perspective: 1000px;
-        }
-
-        @media (max-width: 1100px) {
-            .game-board {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .game-board {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 12px;
-            }
-            
-            .game-info {
-                flex-direction: column;
-                text-align: center;
-                padding: 18px;
-            }
-            
-            .stats {
-                justify-content: center;
-                flex-wrap: wrap;
-                gap: 15px;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .stat-box {
-                min-width: 100px;
-                padding: 12px 18px;
-            }
-            
-            .stat-value {
-                font-size: 1.8rem;
-            }
-            
-            button {
-                padding: 10px 18px;
-                font-size: 0.9rem;
-            }
-            
-            .uide-watermark {
-                font-size: 8rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .game-board {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 10px;
-            }
-            
-            .stat-box {
-                min-width: 85px;
-                padding: 10px 15px;
-            }
-            
-            .stat-value {
-                font-size: 1.6rem;
-            }
-            
-            button {
-                padding: 8px 15px;
-                font-size: 0.85rem;
-            }
-            
-            h1 {
-                font-size: 1.8rem;
-            }
-            
-            .subtitle {
-                font-size: 0.9rem;
-            }
-        }
-
-        /* Cartas - SIN UIDE */
-        .card {
-            height: 150px;
-            border-radius: 15px;
-            perspective: 1000px;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-
-        .card:hover {
-            transform: scale(1.03);
-        }
-
-        .card-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            transform-style: preserve-3d;
-        }
-
-        .card.flipped .card-inner {
-            transform: rotateY(180deg);
-        }
-
-        .card-front, .card-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-            border-radius: 15px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-            overflow: hidden;
-        }
-
-        .card-front {
-            background: linear-gradient(135deg, var(--azul-marino), var(--vino-tinto));
-            color: var(--blanco);
-            font-size: 2.5rem;
-            font-weight: 800;
-            border: 4px solid var(--mostaza);
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        .card-back {
-            background: var(--blanco);
-            transform: rotateY(180deg);
-            border: 4px solid var(--mostaza);
-        }
-
-        .card-back img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .matched {
-            animation: matchedAnimation 0.5s ease;
-            cursor: default;
-        }
-
-        .matched .card-back {
-            border: 4px solid var(--mostaza);
-            box-shadow: 0 0 15px rgba(218, 165, 32, 0.5);
-        }
-
-        @keyframes matchedAnimation {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        /* Barra de progreso */
+        /* Barra de progreso COMPACTA */
         .progress-container {
             width: 100%;
-            height: 12px;
+            height: 8px;
             background: rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            margin: 20px 0 25px 0;
+            border-radius: 6px;
+            margin-bottom: 10px;
             overflow: hidden;
-            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
             position: relative;
-            border: 1px solid rgba(218, 165, 32, 0.3);
+            border: 1px solid rgba(218, 165, 32, 0.2);
+            flex-shrink: 0;
         }
 
         .progress-bar {
@@ -533,7 +303,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
             animation: progressShine 1.5s infinite;
         }
 
@@ -542,89 +312,116 @@
             100% { transform: translateX(100%); }
         }
 
-        /* Banderas decorativas */
-        .flag-icons {
+        /* Tablero de juego AJUSTABLE */
+        .game-board-container {
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .game-board {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            height: 100%;
+            perspective: 1000px;
+        }
+
+        /* Cartas COMPACTAS */
+        .card {
+            height: 100%;
+            min-height: 80px;
+            border-radius: 12px;
+            perspective: 1000px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: scale(1.02);
+        }
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-style: preserve-3d;
+        }
+
+        .card.flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 12px;
             display: flex;
             justify-content: center;
-            gap: 10px;
-            margin: 15px 0;
-            flex-wrap: wrap;
-            font-size: 1.5rem;
-            position: relative;
-            z-index: 1;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
         }
 
-        /* Instrucciones */
-        .game-instructions {
-            background: linear-gradient(135deg, rgba(0, 51, 102, 0.8), rgba(139, 0, 0, 0.8));
-            padding: 20px;
-            border-radius: 15px;
-            margin-top: 20px;
-            border-left: 4px solid var(--mostaza);
-            position: relative;
-            border: 2px solid rgba(218, 165, 32, 0.3);
+        .card-front {
+            background: linear-gradient(135deg, var(--azul-marino), var(--vino-tinto));
+            color: var(--blanco);
+            font-size: 1.8rem;
+            font-weight: 800;
+            border: 3px solid var(--mostaza);
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
         }
 
-        .game-instructions h3 {
-            margin-bottom: 12px;
-            color: var(--mostaza);
-            font-size: 1.2rem;
-            position: relative;
-            z-index: 1;
+        .card-back {
+            background: var(--blanco);
+            transform: rotateY(180deg);
+            border: 3px solid var(--mostaza);
         }
 
-        .game-instructions ul {
-            list-style: none;
-            padding-left: 0;
-            position: relative;
-            z-index: 1;
-        }
-
-        .game-instructions li {
-            margin-bottom: 8px;
-            padding-left: 22px;
-            position: relative;
-            font-size: 0.9rem;
-        }
-
-        .game-instructions li::before {
-            content: '🏁';
-            position: absolute;
-            left: 0;
-        }
-
-        /* Footer */
-        footer {
-            margin-top: 25px;
-            text-align: center;
-            padding: 18px;
-            background: linear-gradient(135deg, rgba(0, 51, 102, 0.8), rgba(139, 0, 0, 0.8));
-            border-radius: 15px;
+        .card-back img {
             width: 100%;
-            border-top: 2px solid var(--mostaza);
-            position: relative;
-            font-size: 0.85rem;
-            border: 2px solid rgba(218, 165, 32, 0.3);
+            height: 100%;
+            object-fit: cover;
         }
 
-        /* Mensaje de victoria */
+        .matched {
+            animation: matchedAnimation 0.4s ease;
+            cursor: default;
+        }
+
+        .matched .card-back {
+            border: 3px solid var(--mostaza);
+            box-shadow: 0 0 10px rgba(218, 165, 32, 0.4);
+        }
+
+        @keyframes matchedAnimation {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
+        }
+
+        /* Mensaje de victoria COMPACTO */
         .message {
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             background: linear-gradient(135deg, var(--vino-tinto), var(--azul-marino));
-            padding: 40px 30px;
-            border-radius: 20px;
+            padding: 25px 20px;
+            border-radius: 15px;
             text-align: center;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
             z-index: 100;
             display: none;
-            max-width: 450px;
+            max-width: 350px;
             width: 90%;
-            border: 4px solid var(--mostaza);
+            border: 3px solid var(--mostaza);
             color: var(--blanco);
-            animation: messageAppear 0.4s ease;
+            animation: messageAppear 0.3s ease;
             position: relative;
         }
 
@@ -640,10 +437,10 @@
         }
 
         .message h2 {
-            margin-bottom: 20px;
-            font-size: 2rem;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
             color: var(--mostaza);
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
             position: relative;
             z-index: 1;
         }
@@ -654,21 +451,177 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.85);
+            background-color: rgba(0, 0, 0, 0.8);
             z-index: 99;
             display: none;
-            backdrop-filter: blur(3px);
+            backdrop-filter: blur(2px);
         }
 
         .score-display {
-            font-size: 1.1rem;
-            margin: 15px 0;
-            padding: 12px;
+            font-size: 0.9rem;
+            margin: 10px 0;
+            padding: 10px;
             background: rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            border: 2px solid rgba(218, 165, 32, 0.3);
+            border-radius: 10px;
+            border: 1px solid rgba(218, 165, 32, 0.2);
             position: relative;
             z-index: 1;
+        }
+
+        #play-again-btn {
+            background: linear-gradient(135deg, var(--azul-marino), var(--vino-tinto));
+            color: var(--blanco);
+            padding: 10px 20px;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        /* Responsive ajustado para UNA SOLA VENTANA */
+        @media (max-width: 1100px) {
+            .game-board {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .game-board {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+            }
+            
+            .game-info {
+                flex-direction: column;
+                text-align: center;
+                padding: 10px;
+                gap: 8px;
+            }
+            
+            .stats {
+                justify-content: center;
+                gap: 8px;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .stat-box {
+                min-width: 75px;
+                padding: 6px 10px;
+            }
+            
+            .stat-value {
+                font-size: 1.3rem;
+            }
+            
+            .stat-label {
+                font-size: 0.65rem;
+            }
+            
+            button {
+                padding: 6px 10px;
+                font-size: 0.75rem;
+            }
+            
+            .uide-watermark {
+                font-size: 6rem;
+            }
+            
+            .flag-icons {
+                font-size: 1rem;
+                gap: 5px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .game-board {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 6px;
+            }
+            
+            .stat-box {
+                min-width: 70px;
+                padding: 5px 8px;
+            }
+            
+            .stat-value {
+                font-size: 1.2rem;
+            }
+            
+            button {
+                padding: 5px 8px;
+                font-size: 0.7rem;
+            }
+            
+            h1 {
+                font-size: 1.3rem;
+            }
+            
+            .card-front {
+                font-size: 1.5rem;
+            }
+            
+            .message {
+                padding: 20px 15px;
+            }
+            
+            .message h2 {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .game-board {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 5px;
+            }
+            
+            .stat-box {
+                min-width: 60px;
+                padding: 4px 6px;
+            }
+            
+            .stat-value {
+                font-size: 1.1rem;
+            }
+            
+            .stat-label {
+                font-size: 0.6rem;
+            }
+            
+            button {
+                padding: 4px 6px;
+                font-size: 0.65rem;
+            }
+            
+            h1 {
+                font-size: 1.1rem;
+            }
+            
+            header {
+                padding: 10px;
+            }
+        }
+
+        /* Ajuste especial para pantallas altas */
+        @media (min-height: 700px) {
+            .card {
+                min-height: 100px;
+            }
+            
+            .card-front {
+                font-size: 2rem;
+            }
+        }
+
+        @media (min-height: 800px) {
+            .card {
+                min-height: 120px;
+            }
+            
+            .card-front {
+                font-size: 2.2rem;
+            }
         }
     </style>
 </head>
@@ -682,12 +635,6 @@
     <div class="corner-decoration corner-bl"></div>
     <div class="corner-decoration corner-br"></div>
     
-    <!-- Logos UIDE en los lados -->
-    <div class="uide-logo-side uide-left">UNIVERSIDAD INTERNACIONAL DEL ECUADOR</div>
-    <div class="uide-logo-side uide-right">UNIVERSIDAD INTERNACIONAL DEL ECUADOR</div>
-    <div class="uide-logo-side uide-top">NEGOCIOS INTERNACIONALES</div>
-    <div class="uide-logo-side uide-bottom">NEGOCIOS INTERNACIONALES</div>
-    
     <!-- Watermark UIDE grande -->
     <div class="uide-watermark">UIDE</div>
 
@@ -699,9 +646,25 @@
             </div>
         </header>
 
+        <div class="game-info">
+            <div class="stats">
+                <div class="stat-box">
+                    <div class="stat-value" id="moves">0</div>
+                    <div class="stat-label">Movimientos</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" id="matches">0</div>
+                    <div class="stat-label">Aciertos</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" id="remaining">9</div>
+                    <div class="stat-label">Restantes</div>
+                </div>
+            </div>
+            
             <div class="controls">
-                <button id="restart-btn"><i class="fas fa-sync-alt"></i> Nuevo Juego</button>
-                <button id="hint-btn"><i class="fas fa-eye"></i> Ver Todas</button>
+                <button id="restart-btn"><i class="fas fa-sync-alt"></i> Nuevo</button>
+                <button id="hint-btn"><i class="fas fa-eye"></i> Ver</button>
             </div>
         </div>
 
@@ -709,8 +672,10 @@
             <div class="progress-bar" id="progress-bar"></div>
         </div>
 
-        <div class="game-board" id="game-board">
-            <!-- Cartas generadas por JavaScript -->
+        <div class="game-board-container">
+            <div class="game-board" id="game-board">
+                <!-- Cartas generadas por JavaScript -->
+            </div>
         </div>
     </div>
 
@@ -719,8 +684,8 @@
     <div class="message" id="win-message">
         <h2><i class="fas fa-trophy"></i> ¡Victoria!</h2>
         <div class="score-display">
-            <p>Has completado el juego de memoria de banderas</p>
-            <p><strong>Movimientos totales:</strong> <span id="final-moves" style="font-size: 2rem; color: var(--mostaza);">0</span></p>
+            <p>Completaste el juego de memoria</p>
+            <p><strong>Movimientos:</strong> <span id="final-moves" style="font-size: 1.5rem; color: var(--mostaza);">0</span></p>
         </div>
         <button id="play-again-btn">
             <i class="fas fa-play-circle"></i> Jugar de Nuevo
@@ -939,9 +904,9 @@
                         canFlip = true;
                         
                         if (matchedPairs === totalPairs) {
-                            setTimeout(() => endGame(), 600);
+                            setTimeout(() => endGame(), 500);
                         }
-                    }, 500);
+                    }, 400);
                 } else {
                     setTimeout(() => {
                         card1.flipped = false;
@@ -952,7 +917,7 @@
                         
                         flippedCards = [];
                         canFlip = true;
-                    }, 800);
+                    }, 600);
                 }
             }
         }
@@ -980,7 +945,7 @@
                 });
                 
                 canFlip = true;
-            }, 1500);
+            }, 1000);
         }
 
         // Finalizar juego
