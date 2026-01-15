@@ -748,7 +748,7 @@
         let cards = [];
         let flippedCards = [];
         let matchedPairs = 0;
-        const totalPairs = 9;
+        const totalPairs = 8;
         let moves = 0;
         let gameStarted = false;
         let canFlip = true;
@@ -825,7 +825,7 @@
             
             movesElement.textContent = moves;
             matchesElement.textContent = matchedPairs;
-            remainingElement.textContent = totalPairs;
+            remainingElement.textContent = 8;
             progressBar.style.width = "0%";
             
             createCards();
@@ -841,8 +841,8 @@
         // Mezclar las banderas primero
         shuffleArray(flagElementsCopy);
         
-        // Tomar las primeras 9 banderas únicas
-        for (let i = 0; i < 9; i++) {
+        // Tomar las primeras 8 banderas únicas
+        for (let i = 0; i < 8; i++) {
             selectedFlags.push(flagElementsCopy[i]);
         }
         
