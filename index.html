@@ -260,7 +260,7 @@
         }
 
         .stat-box::before {
-            content: '🌐'; /* Cambié UIDE por un emoji de globo */
+            content: '🌐';
             position: absolute;
             font-size: 1.5rem;
             font-weight: 900;
@@ -428,7 +428,7 @@
             }
         }
 
-        /* Cartas - SIN UIDE */
+        /* Cartas */
         .card {
             height: 150px;
             border-radius: 15px;
@@ -766,20 +766,16 @@
         const playAgainBtn = document.getElementById('play-again-btn');
         const finalMoves = document.getElementById('final-moves');
 
-        // BANDERAS DE ALTA CALIDAD
+        // BANDERAS DE ALTA CALIDAD - 8 BANDERAS ÚNICAS
         const flagElements = [
-            {name: "Canadá", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Flag_of_Canada.svg/2560px-Flag_of_Canada.svg.png"},
-            {name: "Reino Unido", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Flag_of_the_United_Kingdom.svg/2560px-Flag_of_the_United_Kingdom.svg.png"},
-            {name: "Estados Unidos", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Flag_of_the_United_States.svg/2560px-Flag_of_the_United_States.svg.png"},
-            {name: "México", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Flag_of_Mexico.svg/2560px-Flag_of_Mexico.svg.png"},
-            {name: "Francia", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Flag_of_France.svg/2560px-Flag_of_France.svg.png"},
-            {name: "Alemania", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Flag_of_Germany.svg/2560px-Flag_of_Germany.svg.png"},
-            {name: "Italia", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Flag_of_Italy.svg/2560px-Flag_of_Italy.svg.png"},
-            {name: "Brasil", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Flag_of_Brazil.svg/2560px-Flag_of_Brazil.svg.png"},
             {name: "Japón", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Flag_of_Japan.svg/2560px-Flag_of_Japan.svg.png"},
+            {name: "Francia", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Flag_of_France.svg/2560px-Flag_of_France.svg.png"},
+            {name: "Italia", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Flag_of_Italy.svg/2560px-Flag_of_Italy.svg.png"},
+            {name: "Estados Unidos", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Flag_of_the_United_States.svg/2560px-Flag_of_the_United_States.svg.png"},
+            {name: "Alemania", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Flag_of_Germany.svg/2560px-Flag_of_Germany.svg.png"},
+            {name: "Brasil", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Flag_of_Brazil.svg/2560px-Flag_of_Brazil.svg.png"},
             {name: "España", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Flag_of_Spain.svg/2560px-Flag_of_Spain.svg.png"},
-            {name: "Australia", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Flag_of_Australia_%28converted%29.svg/2560px-Flag_of_Australia_%28converted%29.svg.png"},
-            {name: "China", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Flag_of_the_People%27s_Republic_of_China.svg/2560px-Flag_of_the_People%27s_Republic_of_China.svg.png"}
+            {name: "Canadá", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Flag_of_Canada.svg/2560px-Flag_of_Canada.svg.png"}
         ];
 
         // Inicializar el juego
@@ -800,65 +796,64 @@
             renderCards();
         }
 
-        // Crear cartas - VERSIÓN CORREGIDA
+        // Crear cartas - VERSIÓN DEFINITIVA Y FUNCIONAL
         function createCards() {
             cards = []; // Limpiar array
             
-            // Hacer una copia del array flagElements
-            const flagElementsCopy = flagElements.map(flag => ({
+            // Crear una copia independiente de las banderas
+            const availableFlags = flagElements.map(flag => ({
                 name: flag.name,
                 url: flag.url
             }));
             
             // Mezclar las banderas
-            shuffleArray(flagElementsCopy);
-            
-            // Tomar las primeras 8 banderas
-            const selectedFlags = flagElementsCopy.slice(0, 8);
+            shuffleArray(availableFlags);
             
             // Crear array para todas las cartas
             const allCards = [];
             
-            // Para cada bandera, crear 2 cartas
-            selectedFlags.forEach((flag, pairIndex) => {
-                // Carta 1
-                allCards.push({
-                    id: pairIndex * 2,
-                    pairId: pairIndex, // MISMO pairId para ambas cartas
-                    name: flag.name,
-                    imageUrl: flag.url,
-                    flipped: false,
-                    matched: false
-                });
+            // Crear 8 parejas de cartas
+            for (let i = 0; i < totalPairs; i++) {
+                const flag = availableFlags[i];
+                const pairId = i; // ID único para cada pareja
                 
-                // Carta 2 (la pareja)
-                allCards.push({
-                    id: pairIndex * 2 + 1,
-                    pairId: pairIndex, // MISMO pairId para ambas cartas
+                // Crear DOS cartas INDEPENDIENTES con el mismo pairId
+                const card1 = {
+                    id: Date.now() + Math.random() + i * 2,
+                    pairId: pairId,
                     name: flag.name,
                     imageUrl: flag.url,
                     flipped: false,
                     matched: false
-                });
-            });
+                };
+                
+                const card2 = {
+                    id: Date.now() + Math.random() + i * 2 + 1,
+                    pairId: pairId,
+                    name: flag.name,
+                    imageUrl: flag.url,
+                    flipped: false,
+                    matched: false
+                };
+                
+                allCards.push(card1);
+                allCards.push(card2);
+            }
             
             // Mezclar todas las cartas
             shuffleArray(allCards);
             
-            // Asignar IDs únicos adicionales
-            allCards.forEach((card, index) => {
-                card.uniqueId = index;
-            });
-            
-            // Guardar en variable global
+            // Asignar a la variable global
             cards = allCards;
         }
 
-        // Función para mezclar array
+        // Función para mezclar array - VERSIÓN MEJORADA
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
+                const temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
             }
             return array;
         }
@@ -901,7 +896,7 @@
             return fallbackFlags[index % fallbackFlags.length];
         }
 
-        // Voltear carta - VERSIÓN ÚNICA Y CORREGIDA
+        // Voltear carta - VERSIÓN CORREGIDA
         function flipCard(card, cardElement) {
             if (card.flipped || card.matched || !canFlip || flippedCards.length >= 2) {
                 return;
@@ -923,7 +918,7 @@
                 const card1 = flippedCards[0].card;
                 const card2 = flippedCards[1].card;
                 
-                // COMPARAR POR pairId
+                // Comparar por pairId (esto funciona correctamente)
                 if (card1.pairId === card2.pairId) {
                     setTimeout(() => {
                         card1.matched = true;
@@ -1004,7 +999,7 @@
             initGame();
         });
 
-        // Inicializar
+        // Inicializar el juego al cargar la página
         window.addEventListener("DOMContentLoaded", initGame);
     </script>
 </body>
